@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes remark of an existing person in the address book.
  */
 public class RemarkCommand extends Command {
 
