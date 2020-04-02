@@ -89,7 +89,7 @@ Format: +
 You can navigate to the desired mode to use its features.
 
 Format: +
-`nav [home/ab/schedule/tracker]`
+`nav [home/ab/schedule/progresstracker]`
 
 [NOTE]
 `ab` refers to address book.
@@ -581,12 +581,13 @@ Suppose you want to schedule the flexible task "study vocabulary", +
 ** The total time of all the events related to the task combined exceeds the total time specified by the task.
 
 === Progress Tracker
-A tracker to help you track your study and project progress. Access this mode by entering
-the command `nav tracker`.
+Learn how to work with the progress tracker feature in NOVA. You can track important project tasks by adding them into the progress tracker
+and manage them easily  You need to be in progresstracker mode. Enter the progresstracker mode by entering the command `nav progresstracker`.
+Your NOVA should look something like Figure 5.5 below.
 
 image::GUI_ProgressTracker.png[width="790" align="center"]
 [.text-center]
-_[.small]#Fig 3.5: GUI of NOVA after typing command `nav progress tracker`#_
+_[.small]#Fig 5.5: GUI of NOVA after typing command `nav progresstracker`#_
 
 ==== Add Notes: `add note`
 You can view notes you have added to projects and syllabus in the progress tracker.
