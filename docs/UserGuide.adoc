@@ -589,65 +589,141 @@ image::GUI_ProgressTracker.png[width="790" align="center"]
 [.text-center]
 _[.small]#Fig 5.5: GUI of NOVA after typing command `nav progresstracker`#_
 
-==== Add Notes: `add note`
-You can view notes you have added to projects and syllabus in the progress tracker.
-
-Format: `add note c\[chapter name / ip / tp] n\[note]`
-
-Example: +
-`add note c\OOP n\Object-Oriented Programming (OOP) is a programming paradigm`
-
-Add note “Object-Oriented Programming (OOP) is a programming paradigm” to OOP chapter of the syllabus.
-
-==== Delete Notes: `delete note`
-You can delete the notes that you have added to projects and syllabus in the progress tracker.
-
-Format: `delete note c\[chapter name / ip / tp] i\[note number]`
-
-Example: +
-`delete note c\OOP i\3`
-
-Deletes note number 3 of OOP chapter of the syllabus in the progress tracker.
-
-==== View Notes: `view note`
-You can view the notes that you have added to projects and syllabus in the progress tracker.
-
-Format: `view note c\[chapter name / ip / tp]`
-
-Example: +
-`view note c\OOP`
-
-Shows notes added to the OOP chapter of the syllabus.
-
-==== Complete Tasks: `done`
-You can mark tasks in the progress tracker as done.
-
-Format: `done c\[chapter name / project]`
-
-Example: +
-`done c\OOP`
-
-Sets the OOP chapter as done in progress tracker.
-
 ==== Add Project Task: `add`
 You can add tasks under projects in the progress tracker.
 
-Format: `add p\[ip / tp] t\[task]`
+Format: +
+`add p\[ip/tp] w\[week number] d\[task description]`
+
+[NOTE]
+====
+* The week number **must be a positive integer** 1, 2, 3, …
+* Task description cannot be empty
+* Only IP and TP projects are available in the progress tracker
+====
 
 Example: +
-`Add p\IP t\Level-7 Duke`
+Suppose you want to add a task to week 3 of IP project to remind yourself to do up javaFx,
 
-Adds tasks “Level-7 Duke” to IP in progress tracker.
+`Add p\ip w\3 d\Do up javaFx`
+
+adds task “Do up javaFx” to week 3 of IP in progress tracker.
+
+==== View Project Task: `list`
+You can view tasks under a certain week for projects in the progress tracker.
+
+Format: +
+`list p\[ip/tp] w\[week number]`
+
+[NOTE]
+====
+* The week number **must be a positive integer** 1, 2, 3, …
+* Only IP and TP projects are available in the progress tracker
+====
+
+Example: +
+Suppose you would like to view the tasks you have added to week 3 of IP project,
+
+`list p\ip w\3`
+
+lists tasks in week 3 of IP project.
 
 ==== Delete Project Task: `delete`
 You can remove tasks under projects in the progress tracker.
 
-Format: `delete p\[project] i\[task number]`
+Format: `delete p\[ip/tp] w\[week number] t\[task number]`
+
+[NOTE]
+====
+* The week number and task number **must be a positive integer** 1, 2, 3, …
+* Only IP and TP projects are available in the progress tracker
+====
 
 Example: +
-`delete p\IP i\3`
+Suppose you wish to delete task number 3 in week 3 of IP project,
 
-Deletes task 3 of IP in progress tracker.
+`delete p\ip w\3 t\3`
+
+deletes task 3 in week 3 of IP in progress tracker.
+
+==== Complete Tasks: `done`
+You can mark tasks in the progress tracker as done.
+
+Format: +
+`done p\[ip/tp] w\[week number] t\[task number]`
+
+[NOTE]
+====
+* The week number and task number **must be a positive integer** 1, 2, 3, …
+* Only IP and TP projects are available in the progress tracker
+====
+
+Example: +
+Suppose you wish to set task number 2 in week 3 of IP project as done or undone,
+
+`done p\ip w\3 t\2`
+
+sets task 2 in week 3 of IP in progress tracker as done/ undone depending on it's status originally.
+
+==== Add Notes: `addNote`
+You can add notes to projects tasks in the progress tracker.
+
+Format: +
+`addNote p\[ip/tp] w\[week number] t\[task number] d\note`
+
+[NOTE]
+====
+* The week number and task number **must be a positive integer** 1, 2, 3, …
+* Note cannot be empty
+* Only IP and TP projects are available in the progress tracker
+====
+
+Example: +
+Suppose you wish to add a note to remind yourself to create a branch and tag for task number 2 in week 3 of IP project,
+
+`addNote p\ip w\3 t\2 d\Need create branch and tag`
+
+adds note “Need create branch and tag” to task 2 in week 3 of IP.
+
+==== Delete Note: `deleteNote`
+You can delete the note that you have added to tasks in projects in the progress tracker.
+
+Format: +
+    `deleteNote p\[ip/tp] w\[week number] t\[task number]`
+
+[NOTE]
+====
+* The week, task and note number **must be a positive integer** 1, 2, 3, …
+* Only IP and TP projects are available in the progress tracker
+====
+
+Example: +
+Suppose you wish to delete the note added in task 2 of week 3 in IP project,
+
+`deleteNote p\[ip] w\3 t\2 i\2`
+
+deletes the note under task 2 of week 3 of IP.
+
+==== Edit Note: `editNote`
+You can edit the note that you have added to tasks in projects in the progress tracker.
+
+Format: +
+`editNote p\[ip/tp] w\[week number] t\[task number] d\[new note]`
+
+[NOTE]
+====
+* The week, task and note number **must be a positive integer** 1, 2, 3, …
+* New note cannot be empty
+* Only IP and TP projects are available in the progress tracker
+====
+
+Example: +
+Suppose you wish to edit the note added in task 2 of week 3 in IP project,
+
+`editNote p\[ip] w\3 t\2 i\2`
+
+edits the note under task 2 of week 3 of IP.
+
 
 == Command Summary
 
@@ -684,6 +760,15 @@ your schedule
 into your schedule
 | view t\[YYYY-MM-DD] | Shows the events happening on the specified date
 | view week i\[week #] | Shows the events happening on the specified week
+
+.7+| Progress Tracker
+| add p\[ip/tp] w\[week number] d\[task description] | Adds a task to the specified week and project
+| list p\[ip/tp] w\[week number] | Lists the tasks that have been added to the specified week and project
+| delete p\ip w\3 t\3 | Adds the specified task in the specified week and project
+| done p\[ip/tp] w\[week number] t\[task number] | Sets the status of the specified task to done
+| addNote p\[ip/tp] w\[week number] t\[task number] d\note | Adds a note to the specified task
+| deleteNote p\[ip/tp] w\[week number] t\[task number] | Deletes the note in the specified task
+| editNote p\[ip/tp] w\[week number] t\[task number] d\[new note] | Deletes the note in the specified task
 
 |=========================================================
 
