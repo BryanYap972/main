@@ -6,13 +6,16 @@ import static seedu.nova.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.logging.Logger;
+
+import seedu.nova.commons.core.LogsCenter;
 import seedu.nova.logic.commands.Command;
 import seedu.nova.logic.commands.CommandResult;
 import seedu.nova.logic.commands.exceptions.CommandException;
 import seedu.nova.model.Model;
 
 /**
- * Adds task to specified week
+ * Adds note to specified task
  */
 public class PtAddNoteCommand extends Command {
     public static final String COMMAND_WORD = "addNote";
@@ -36,11 +39,20 @@ public class PtAddNoteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added note to task %d in week %d of %s";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private int weekNum;
     private int taskNum;
     private String project;
     private String note;
 
+    /**
+     * Creates a PtAddNoteCommand
+     * @param weekNum week of PtTask for note to be added to
+     * @param taskNum taskNum of PtTask for note to be added to
+     * @param project project of PtTask for note to be added to
+     * @param note note to be added to
+     */
     public PtAddNoteCommand(int weekNum, int taskNum, String project, String note) {
         requireNonNull(project);
         requireNonNull(note);
@@ -69,9 +81,12 @@ public class PtAddNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing addNote command for: project " + project + ", week " + weekNum + ", task " + taskNum);
+
         requireNonNull(model);
         boolean isOver13 = weekNum > 13;
 
+        //if week is over 13, throw no week error message
         if (isOver13) {
             throw new CommandException(MESSAGE_NOWEEK);
         } else {

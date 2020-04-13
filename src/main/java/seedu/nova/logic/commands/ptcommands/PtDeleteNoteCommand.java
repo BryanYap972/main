@@ -6,6 +6,9 @@ import static seedu.nova.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.logging.Logger;
+
+import seedu.nova.commons.core.LogsCenter;
 import seedu.nova.logic.commands.Command;
 import seedu.nova.logic.commands.CommandResult;
 import seedu.nova.logic.commands.exceptions.CommandException;
@@ -35,11 +38,21 @@ public class PtDeleteNoteCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Deleted note to task %d in week %d of %s";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private int weekNum;
     private int taskNum;
     private String project;
 
+    /**
+     * Creates PtDeleteNoteCommand object
+     * @param weekNum week of PtTask with note to be deleted
+     * @param taskNum task number of PtTask with note to be deleted
+     * @param project project of PtTask with note to be deleted
+     */
     public PtDeleteNoteCommand(int weekNum, int taskNum, String project) {
+        requireNonNull(project);
+
         this.weekNum = weekNum;
         this.taskNum = taskNum;
         this.project = project.trim().toLowerCase();
@@ -59,9 +72,12 @@ public class PtDeleteNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing deleteNote command for: project " + project + ", week " + weekNum + ", task " + taskNum);
+
         requireNonNull(model);
         boolean isOver13 = weekNum > 13;
 
+        //if week is over 13, throw no week error message
         if (isOver13) {
             throw new CommandException(MESSAGE_NOWEEK);
         } else {

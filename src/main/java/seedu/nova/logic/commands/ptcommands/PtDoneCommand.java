@@ -6,6 +6,9 @@ import static seedu.nova.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.logging.Logger;
+
+import seedu.nova.commons.core.LogsCenter;
 import seedu.nova.logic.commands.Command;
 import seedu.nova.logic.commands.CommandResult;
 import seedu.nova.logic.commands.exceptions.CommandException;
@@ -33,10 +36,18 @@ public class PtDoneCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Changed done status of task %d in week %d of %s";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private int weekNum;
     private String project;
     private int taskNum;
 
+    /**
+     * Creates PtDoneCommand object
+     * @param weekNum week of PtTask to set done/ undone
+     * @param project project of PtTask to set done/ undone
+     * @param taskNum task number of PtTask to set done/ undone
+     */
     public PtDoneCommand(int weekNum, String project, int taskNum) {
         requireNonNull(project);
 
@@ -59,9 +70,12 @@ public class PtDoneCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing done command for: project " + project + ", week " + weekNum + ", task " + taskNum);
+
         requireNonNull(model);
         boolean isOver13 = weekNum > 13;
 
+        //if week is over 13, throw no week error message
         if (isOver13) {
             throw new CommandException(MESSAGE_NOWEEK);
         } else {

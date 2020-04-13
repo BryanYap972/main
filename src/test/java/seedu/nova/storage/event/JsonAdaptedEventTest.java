@@ -51,77 +51,77 @@ class JsonAdaptedEventTest {
     @Test
     public void toModelType_validEventType() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(INVALID_EVENT_TYPE, "Test Description", "Test Venue",
-                INVALID_DATE, VALID_START_TIME, VALID_END_TIME, "Test Note");
+                INVALID_DATE, VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidDate_throwsParseException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", INVALID_DATE,
-                VALID_START_TIME, VALID_END_TIME, "Test Note");
+                VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(ParseException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidStartTime_throwsDateTimeParseException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", VALID_DATE,
-                INVALID_START_TIME, VALID_END_TIME, "Test Note");
+                INVALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(ParseException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidEndTime_throwsDateTimeParseException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", VALID_DATE,
-                VALID_START_TIME, INVALID_END_TIME, "Test Note");
+                VALID_START_TIME, INVALID_END_TIME, "Test Note", null);
         assertThrows(ParseException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullEventType_throwsNullPointerException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(null, "Test Description", "Test Venue", VALID_DATE,
-                VALID_START_TIME, VALID_END_TIME, "Test Note");
+                VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(NullPointerException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, null, "Test Venue", VALID_DATE,
-                VALID_START_TIME, VALID_END_TIME, "Test Note");
+                VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullVenue_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", null, VALID_DATE,
-                VALID_START_TIME, VALID_END_TIME, "Test Note");
+                VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", null,
-                VALID_START_TIME, VALID_END_TIME, "Test Note");
+                VALID_START_TIME, VALID_END_TIME, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullStartTime_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", VALID_DATE,
-                null, VALID_END_TIME, "Test Note");
+                null, VALID_END_TIME, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullEndTime_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", VALID_DATE,
-                VALID_START_TIME, null, "Test Note");
+                VALID_START_TIME, null, "Test Note", null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 
     @Test
     public void toModelType_nullNote_throwsIllegalValueException() {
         JsonAdaptedEvent event = new JsonAdaptedEvent(VALID_EVENT_TYPE, "Test Description", "Test Venue", VALID_DATE,
-                VALID_START_TIME, VALID_END_TIME, null);
+                VALID_START_TIME, VALID_END_TIME, null, null);
         assertThrows(IllegalValueException.class, event::toModelType);
     }
 }

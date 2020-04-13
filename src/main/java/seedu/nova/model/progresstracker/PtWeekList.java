@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class PtWeekList {
     private ArrayList<PtWeek> weekList;
 
+    /**
+     * Creates PtWeekList object
+     */
     public PtWeekList() {
         weekList = new ArrayList<>();
 
@@ -43,6 +46,7 @@ public class PtWeekList {
         double numWeeks = 0;
         double totalPercentage = 0;
 
+        //Get progress of each week
         for (int i = 0; i < weekList.size(); i++) {
             PtWeek current = weekList.get(i);
             PtTaskList taskList = current.getTaskList();

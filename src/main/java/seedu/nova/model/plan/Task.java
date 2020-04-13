@@ -1,5 +1,6 @@
 package seedu.nova.model.plan;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import seedu.nova.model.util.time.TimeUtil;
 /**
  * task inside plan, represents a soon-to-be-defined event for each day.
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
     protected TaskDetails details;
     protected TreeMap<LocalDate, Event> dayEventMap;
     protected Duration totalEventDuration;
@@ -24,6 +25,10 @@ public abstract class Task {
         this.details = details;
         this.dayEventMap = new TreeMap<>();
         this.totalEventDuration = Duration.ZERO;
+    }
+
+    public TaskDetails getDetails() {
+        return details;
     }
 
     public String getName() {
@@ -141,6 +146,7 @@ public abstract class Task {
 
     /**
      * List out all the events
+     *
      * @return string of list of events
      */
     protected String listEvents() {

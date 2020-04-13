@@ -15,7 +15,7 @@ import seedu.nova.logic.parser.Prefix;
 import seedu.nova.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new PtDoneCommand object
+ * Parses input arguments and creates a new PtEditCommand object
  */
 public class PtEditCommandParser implements Parser<PtEditCommand> {
 

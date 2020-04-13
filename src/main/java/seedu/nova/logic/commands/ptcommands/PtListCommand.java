@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.logging.Logger;
+
+import seedu.nova.commons.core.LogsCenter;
 import seedu.nova.logic.commands.Command;
 import seedu.nova.logic.commands.CommandResult;
 import seedu.nova.logic.commands.exceptions.CommandException;
@@ -30,9 +33,16 @@ public class PtListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%s Project (Week %d):\n";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private int weekNum;
     private String project;
 
+    /**
+     * Creates PtListCommand object
+     * @param weekNum week to be listed
+     * @param project project to be listed
+     */
     public PtListCommand(int weekNum, String project) {
         requireNonNull(project);
 
@@ -50,9 +60,12 @@ public class PtListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing list command for: project " + project + ", week " + weekNum);
+
         requireNonNull(model);
         boolean isOver13 = weekNum > 13;
 
+        //if week is over 13, throw no week error message
         if (isOver13) {
             throw new CommandException(MESSAGE_NOWEEK);
         } else {

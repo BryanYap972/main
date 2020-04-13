@@ -123,3 +123,7 @@ include::../DeveloperGuide.adoc[tag=listPt]
 |=======================================================================
 
 include::../DeveloperGuide.adoc[tag=UseCasesPt]
+
+include::../DeveloperGuide.adoc[tag=shutdown]
+
+include::../DeveloperGuide.adoc[tag=Pt]

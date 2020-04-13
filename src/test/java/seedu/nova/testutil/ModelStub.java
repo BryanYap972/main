@@ -77,6 +77,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setModeEnum(Mode mode, ModeEnum modeEnum) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         throw new AssertionError("This method should not be called.");
     }

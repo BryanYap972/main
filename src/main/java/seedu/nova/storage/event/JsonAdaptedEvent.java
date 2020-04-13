@@ -8,11 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.nova.commons.exceptions.IllegalValueException;
 import seedu.nova.logic.parser.ParserUtil;
+import seedu.nova.model.plan.Task;
 import seedu.nova.model.schedule.event.Consultation;
 import seedu.nova.model.schedule.event.Event;
 import seedu.nova.model.schedule.event.Lesson;
 import seedu.nova.model.schedule.event.Meeting;
 import seedu.nova.model.schedule.event.StudySession;
+import seedu.nova.model.schedule.event.WeakEvent;
+import seedu.nova.model.util.time.duration.DateTimeDuration;
+import seedu.nova.storage.JsonAdaptedPlannerTask;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -28,6 +32,7 @@ public class JsonAdaptedEvent {
     private final String startTime;
     private final String endTime;
     private final String note;
+    private final JsonAdaptedPlannerTask task;
 
 
     /**
@@ -38,9 +43,10 @@ public class JsonAdaptedEvent {
                             @JsonProperty("desc") String desc,
                             @JsonProperty("venue") String venue,
                             @JsonProperty("date") String date,
-                             @JsonProperty("startTime") String startTime,
-                             @JsonProperty("endTime") String endTime,
-                             @JsonProperty("note") String note) {
+                            @JsonProperty("startTime") String startTime,
+                            @JsonProperty("endTime") String endTime,
+                            @JsonProperty("note") String note,
+                            @JsonProperty("task") JsonAdaptedPlannerTask task) {
         this.eventType = eventType;
         this.desc = desc;
         this.venue = venue;
@@ -48,6 +54,7 @@ public class JsonAdaptedEvent {
         this.startTime = startTime;
         this.endTime = endTime;
         this.note = note;
+        this.task = task;
     }
 
     /**
@@ -61,6 +68,11 @@ public class JsonAdaptedEvent {
         startTime = source.getStartTime().toString();
         endTime = source.getEndTime().toString();
         note = source.getNote();
+        if (source instanceof WeakEvent) {
+            task = new JsonAdaptedPlannerTask(((WeakEvent) source).getOriginTask());
+        } else {
+            task = null;
+        }
     }
 
     /**
@@ -69,19 +81,23 @@ public class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
-        if (eventType.equals("meeting")) {
+        switch (eventType) {
+        case "meeting":
             return toMeeting();
 
-        } else if (eventType.equals("consultation")) {
+        case "consultation":
             return toConsultation();
 
-        } else if (eventType.equals("study")) {
+        case "study":
             return toStudy();
 
-        } else if (eventType.equals("lesson")) {
+        case "lesson":
             return toLesson();
 
-        } else {
+        case "weak":
+            return toWeak();
+
+        default:
             throw new IllegalValueException("Unrecognised event type.");
         }
 
@@ -89,6 +105,7 @@ public class JsonAdaptedEvent {
 
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Meeting} object.
+     *
      * @return an Event
      * @throws IllegalValueException
      */
@@ -106,6 +123,7 @@ public class JsonAdaptedEvent {
 
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Consultation} object.
+     *
      * @return an Event
      * @throws IllegalValueException
      */
@@ -123,6 +141,7 @@ public class JsonAdaptedEvent {
 
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code StudySession} object.
+     *
      * @return an Event
      * @throws IllegalValueException
      */
@@ -140,6 +159,7 @@ public class JsonAdaptedEvent {
 
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Lesson} object.
+     *
      * @return an Event
      * @throws IllegalValueException
      */
@@ -158,7 +178,27 @@ public class JsonAdaptedEvent {
     }
 
     /**
+     * Converts this Jackson-friendly adapted event object into the model's {@code WeakEvent} object.
+     *
+     * @return an Event
+     * @throws IllegalValueException
+     */
+    public Event toWeak() throws IllegalValueException {
+        checkFields();
+
+        LocalDate localDate = ParserUtil.parseDate(date);
+
+        LocalTime start = ParserUtil.parseTime(startTime);
+        LocalTime end = ParserUtil.parseTime(endTime);
+
+        Task t = task.toTask();
+
+        return new WeakEvent(desc, new DateTimeDuration(localDate, start, end), t);
+    }
+
+    /**
      * Checks for any missing fields.
+     *
      * @throws IllegalValueException
      */
     public void checkFields() throws IllegalValueException {

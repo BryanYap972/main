@@ -15,6 +15,10 @@ public class PtWeek {
     private int weekNum;
     private PtTaskList taskList;
 
+    /**
+     * Creates PtWeek object
+     * @param num week number
+     */
     public PtWeek(int num) {
         weekNum = num;
         taskList = new PtTaskList();

@@ -17,6 +17,10 @@ public class TaskDesc {
 
     private String desc;
 
+    /**
+     * Creates TaskDesc object
+     * @param desc task description
+     */
     public TaskDesc(String desc) {
         requireNonNull(desc);
         checkArgument(isValidTaskDesc(desc), MESSAGE_CONSTRAINTS);

@@ -1,5 +1,6 @@
 package seedu.nova.model.schedule.event;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import seedu.nova.model.util.time.duration.WeekDayDuration;
 /**
  * Represents an Event that can be managed.
  */
-public class Event implements Comparable<Event> {
+public abstract class Event implements Comparable<Event>, Serializable {
     protected String desc;
     protected String venue;
     protected LocalTime startTime;
@@ -22,7 +23,7 @@ public class Event implements Comparable<Event> {
     protected String note = "NIL";
     protected TimedDuration dtd;
 
-    public Event(String desc, String venue, LocalTime startTime, LocalTime endTime, LocalDate date) {
+    protected Event(String desc, String venue, LocalTime startTime, LocalTime endTime, LocalDate date) {
         this.desc = desc;
         this.venue = venue;
         this.startTime = startTime;
@@ -31,7 +32,7 @@ public class Event implements Comparable<Event> {
         this.dtd = new DateTimeDuration(date, startTime, endTime);
     }
 
-    public Event(String desc, String venue, LocalTime startTime, LocalTime endTime, DayOfWeek dow) {
+    protected Event(String desc, String venue, LocalTime startTime, LocalTime endTime, DayOfWeek dow) {
         this.desc = desc;
         this.venue = venue;
         this.startTime = startTime;
@@ -40,9 +41,7 @@ public class Event implements Comparable<Event> {
         this.dtd = new WeekDayDuration(dow, startTime, endTime);
     }
 
-    public String getEventType() {
-        return "type";
-    }
+    public abstract String getEventType();
 
     public String getDesc() {
         return desc;

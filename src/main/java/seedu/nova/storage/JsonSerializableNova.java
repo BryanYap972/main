@@ -16,6 +16,9 @@ import seedu.nova.model.ReadOnlyAddressBook;
 import seedu.nova.model.Schedule;
 import seedu.nova.model.VersionedAddressBook;
 import seedu.nova.model.person.Person;
+import seedu.nova.model.plan.Plan;
+import seedu.nova.model.plan.StudyPlan;
+import seedu.nova.model.plan.Task;
 import seedu.nova.model.progresstracker.Ip;
 import seedu.nova.model.progresstracker.ProgressTracker;
 import seedu.nova.model.progresstracker.Project;
@@ -38,15 +41,18 @@ class JsonSerializableNova {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedPtTask> ptTasks = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
+    private final List<JsonAdaptedPlannerTask> tasks = new ArrayList<>();
 
     //add your list of adapted class objects here
+
     /**
      * Constructs a {@code JsonSerializableNova} with the given persons.
      */
     @JsonCreator
     public JsonSerializableNova(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                 @JsonProperty("ptTasks") List<JsonAdaptedPtTask> ptTasks,
-                                @JsonProperty("events") List<JsonAdaptedEvent> events) {
+                                @JsonProperty("events") List<JsonAdaptedEvent> events,
+                                @JsonProperty("tasks") List<JsonAdaptedPlannerTask> tasks) {
         this.ptTasks.addAll(ptTasks);
 
         if (persons != null) {
@@ -54,6 +60,9 @@ class JsonSerializableNova {
         }
         if (events != null) {
             this.events.addAll(events);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -69,11 +78,15 @@ class JsonSerializableNova {
         ptTasks.addAll(getPtTasks(source));
 
         events.addAll(source.getScheduleNova().getEventList().stream()
-                      .map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+                .map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+
+        tasks.addAll(source.getStudyPlan().getTaskList().stream()
+                .map(JsonAdaptedPlannerTask::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts a given {@code Nova} into a list of adapted objects
+     *
      * @param source uture changes to this will not affect the created {@code JsonSerializableNova}.
      * @return a list of JsonAdaptedPtTask
      */
@@ -106,6 +119,7 @@ class JsonSerializableNova {
 
     /**
      * Converts Nova into the model's {@code Nova} object.
+     *
      * @return the converted Nova object
      * @throws IllegalValueException
      */
@@ -121,7 +135,23 @@ class JsonSerializableNova {
         nova.setAddressBookNova(ab);
         nova.setScheduleNova(sc);
 
+        Plan plan = toModelTypePlan();
+        nova.setStudyPlan(plan);
+
         return nova;
+    }
+
+    /**
+     * Converts this plan into the model's {@code Plan} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private Plan toModelTypePlan() throws IllegalValueException {
+        List<Task> taskLst = new ArrayList<>();
+        for (JsonAdaptedPlannerTask t : tasks) {
+            taskLst.add(t.toTask());
+        }
+        return new StudyPlan(taskLst);
     }
 
     /**
@@ -156,7 +186,7 @@ class JsonSerializableNova {
         Ip ip = pt.getIp();
         Tp tp = pt.getTp();
 
-        for (JsonAdaptedPtTask adaptedPtTask: ptTasks) {
+        for (JsonAdaptedPtTask adaptedPtTask : ptTasks) {
             PtTaskList taskList;
             PtTask modelTask = adaptedPtTask.toModelType();
             Project project = modelTask.getProject();
@@ -186,7 +216,7 @@ class JsonSerializableNova {
         Schedule sc = new Schedule(LocalDate.of(2020, 1, 13),
                 LocalDate.of(2020, 5, 3));
 
-        for (JsonAdaptedEvent jsonAdaptedEvent: events) {
+        for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
 
             //if (event instanceof Lesson) {

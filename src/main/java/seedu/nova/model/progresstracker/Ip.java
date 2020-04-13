@@ -7,6 +7,9 @@ public class Ip extends Project {
     private PtWeekList weekList;
     private String projectName;
 
+    /**
+     * Creates Ip object
+     */
     public Ip() {
         weekList = new PtWeekList();
         projectName = "ip";

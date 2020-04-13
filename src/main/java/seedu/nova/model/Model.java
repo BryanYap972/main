@@ -59,13 +59,38 @@ public interface Model {
      */
     void setNovaFilePath(Path addressBookFilePath);
 
+    /**
+     * Retrieves Nova object
+     * @return Nova object
+     */
     Nova getNova();
 
+    /**
+     * Retrieves mode
+     * @return mode
+     */
     Mode getMode();
 
+    /**
+     * Retrieves ModeEnum in mode
+     * @param mode mode to get ModeEnum from
+     * @return ModeEnum in mode
+     */
     ModeEnum getModeEnum(Mode mode);
 
+    /**
+     * Gets the string form of the modeEnum
+     * @param modeEnum modeEnum to get name from
+     * @return name of modeEnum
+     */
     String getModeName(ModeEnum modeEnum);
+
+    /**
+     * Sets modeEnum in mode
+     * @param mode mode to set modeEnum
+     * @param modeEnum modeEnum to be set
+     */
+    void setModeEnum(Mode mode, ModeEnum modeEnum);
 
     /**
      * Returns the AddressBook
@@ -163,25 +188,94 @@ public interface Model {
 
     //============== Progress Tracker =============
 
+    /**
+     * Retrieves ProgressTracker object
+     * @return ProgressTracker object
+     */
     ProgressTracker getProgressTracker();
 
+    /**
+     * Retrieves Ip object
+     * @return Ip object
+     */
     Ip getProgressTrackerIp();
 
+    /**
+     * Retrieves Tp object
+     * @return Tp object
+     */
     Tp getProgressTrackerTp();
 
+    /**
+     * Lists PtTasks in specified week of project
+     * @param projectName project to list tasks in
+     * @param weekNum week to list tasks in
+     * @return String of lists of tasks
+     */
     String listPtTask(String projectName, int weekNum);
 
+    /**
+     * Adds PtTask
+     * @param projectName Project to add PtTask to
+     * @param weekNum week to add PtTask to
+     * @param task PtTask to be added
+     */
     void addPtTask(String projectName, int weekNum, PtTask task);
 
+    /**
+     * Deletes PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to be deleted
+     * @return boolean on whether execution was successful
+     */
     boolean deletePtTask(String projectName, int weekNum, int taskNum);
 
+    /**
+     * Edits PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to be deleted
+     * @param taskDesc new task description
+     * @return boolean on whether execution was successful
+     */
     boolean editPtTask(String projectName, int weekNum, int taskNum, String taskDesc);
 
+    /**
+     * Changes done status of PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to change done
+     * @return boolean on whether execution was successful
+     */
     boolean setDonePtTask(String projectName, int weekNum, int taskNum);
 
+    /**
+     * Adds note to PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to add note to
+     * @param note note to be added
+     * @return boolean on whether execution was successful
+     */
     boolean addPtNote(String projectName, int weekNum, int taskNum, String note);
 
+    /**
+     * Deletes note from PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to delete note
+     * @return boolean on whether execution was successful
+     */
     boolean deletePtNote(String projectName, int weekNum, int taskNum);
 
+    /**
+     * Edits note of PtTask
+     * @param projectName Project the PtTask in
+     * @param weekNum week the PtTask in
+     * @param taskNum task number of PtTask to edit note
+     * @param note new note
+     * @return boolean on whether execution was successful
+     */
     boolean editPtNote(String projectName, int weekNum, int taskNum, String note);
 }

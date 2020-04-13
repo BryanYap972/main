@@ -2,6 +2,7 @@ package seedu.nova.model.plan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,10 +13,16 @@ import seedu.nova.model.schedule.event.Event;
  * Plan with definite tasks
  */
 public class StudyPlan implements Plan {
-    private HashMap<TaskDetails, Task> map;
+    private HashMap<TaskDetails, Task> map = new HashMap<>();
 
     public StudyPlan() {
         resetPlan();
+    }
+
+    public StudyPlan(Collection<Task> tasks) {
+        for (Task t : tasks) {
+            addTask(t);
+        }
     }
 
     @Override

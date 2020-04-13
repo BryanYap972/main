@@ -5,7 +5,6 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":LogicParser" as LogicParser LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AbUndoCommandParser" as AbUndoCommandParser LOGIC_COLOR
 participant "u:AbUndoCommand" as AbUndoCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -34,30 +33,15 @@ activate Mode
 Mode --> LogicParser : mode
 deactivate Mode
 
-LogicParser -> AddressBookParser : parseCommand("undo")
+LogicParser -> AddressBookParser : parseCommand("undo", "")
 activate AddressBookParser
 
-create AbUndoCommandParser
-AddressBookParser -> AbUndoCommandParser
-activate AbUndoCommandParser
-
-AbUndoCommandParser --> AddressBookParser
-deactivate AbUndoCommandParser
-
-AddressBookParser -> AbUndoCommandParser : parse("undo")
-activate AbUndoCommandParser
-
 create AbUndoCommand
-AbUndoCommandParser -> AbUndoCommand
+AddressBookParser -> AbUndoCommand
 activate AbUndoCommand
 
-AbUndoCommand --> AbUndoCommandParser : u
+AbUndoCommand --> AddressBookParser
 deactivate AbUndoCommand
-
-AbUndoCommandParser --> AddressBookParser : u
-deactivate AbUndoCommandParser
-AbUndoCommandParser -[hidden]-> LogicManager : u
-destroy AbUndoCommandParser
 
 AddressBookParser --> LogicParser : u
 deactivate AddressBookParser

@@ -20,6 +20,7 @@ endif::[]
 By: `Team CS2103T-F10-3`      Since: `Apr 2020`      Licence: `MIT`
 
 [[Intro]]
+// tag::intro[]
 == Introduction
 
 Welcome to the user guide (UG) for Next-gen Organizing Virtual Assistant (NOVA).
@@ -31,7 +32,8 @@ through typing.
 image::userguide/guiComponents.png[width="790" align="center"]
 [.text-center]
 _[.small]#Fig 1: Components of NOVA#_
-
+// end::intro[]
+// tag::about[]
 [[About]]
 == About
 
@@ -43,7 +45,8 @@ There is an entire <<Features, section>> dedicated to how to use any particular 
 for your
 better understanding. We have also provided a <<Summary, summary of commands>> for your quick reference. Should you
 face any problems, take a look at the <<FAQ, FAQ section>>.
-
+// end::about[]
+// tag::notation[]
 [[Notation]]
 == Notations
 In this guide, you'll be seeing the following markup being used.
@@ -55,7 +58,7 @@ This icon indicates details that could help you better understand how to use NOV
 This icon indicates actions that could negatively affect your experience while using NOVA.
 
 `Commands` and `input fields` are highlighted.
-
+// end::notation[]
 [[QuickStart]]
 == Quick Start
 Here are some steps to get you started:
@@ -81,8 +84,10 @@ _[.small]#Fig 4.2: GUI of NOVA after entering `nav ab`#_
 You can use the following commands once you are in address book mode:
 
 ** *`list`* : lists all contacts
+
 ** `add n\John Doe p\98765432 e\\john@gmail.com c\classmate` : adds a contact named *John Doe* to the Address Book
  and categorise as classmate
+
 * *`exit`* : exits the app
 
 Refer to <<Features, Features>> for details of each command.
@@ -360,6 +365,8 @@ image::userguide/schedule_nav.png[width="790" align="center"]
 [.text-center]
 _[.small]#Figure 5.3: GUI of NOVA after user typed `nav schedule`#_
 
+// tag::events[]
+
 ==== Add a Meeting: `meeting`
 You can add a meeting as one of your events.
 If there is already an event in the time slot, NOVA will inform you.
@@ -370,6 +377,8 @@ Format: `meeting d\[description] v\[venue] t\[YYYY-MM-DD] [Start time (HH:MM)] [
 ====
 * The `[End time (HH:MM)]` must be later than the `[Start time (HH:MM)]`.
 * You can only add meetings to dates that fall within the semester.
+* All prefixes (i.e. `d\`, `v\` and `t\`) must be present.
+* `[description]` and/or `[venue]` can be left as blank spaces if you wish (i.e. " ").
 ====
 
 Example: +
@@ -390,12 +399,14 @@ _[.small]#Fig 5.3.1: Display message after entering +
 You can add a study session as one of your events.
 If there is already an event in the time slot, NOVA will inform you.
 
-Format: `study d\[description] v\[venue] t\ [YYYY-MM-DD] [Start time (HH:MM)] [End time (HH:MM)]`
+Format: `study d\[description] v\[venue] t\[YYYY-MM-DD] [Start time (HH:MM)] [End time (HH:MM)]`
 
 [NOTE]
 ====
 * The `[End time (HH:MM)]` must be later than the `[Start time (HH:MM)]`.
 * You can only add study sessions to dates that fall within the semester.
+* All prefixes (i.e. `d\`, `v\` and `t\`) must be present.
+* `[description]` and/or `[venue]` can be left as blank spaces if you wish (i.e. " ").
 ====
 
 Example: +
@@ -422,6 +433,8 @@ Format: `consultation d\[description] v\[venue] t\[YYYY-MM-DD] [Start time (HH:M
 ====
 * The `[End time (HH:MM)]` must be later than the `[Start time (HH:MM)]`.
 * You can only add consultation sessions to dates that fall within the semester.
+* All prefixes (i.e. `d\`, `v\` and `t\`) must be present.
+* `[description]` and/or `[venue]` can be left as blank spaces if you wish (i.e. " ").
 ====
 
 Example: +
@@ -449,6 +462,8 @@ Format: `lesson d\[description] v\[venue] t\[day] [Start time (HH:MM)] [End time
 * The `[End time (HH:MM)]` must be later than the `[Start time (HH:MM)]`.
 * The lesson will be repeated weekly from weeks 1 to 13.
 * There will not be lessons in the recess week.
+* All prefixes (i.e. `d\`, `v\` and `t\`) must be present.
+* `[description]` and/or `[venue]` can be left as blank spaces if you wish (i.e. " ").
 ====
 
 Example: +
@@ -472,7 +487,10 @@ If the event does not exist, NOVA will inform you.
 Format: `delete t\[YYYY-MM-DD] i\[index]`
 
 [NOTE]
-`[index]` must be a positive integer. (E.g. 1, 2, 3, ...)
+====
+* `[index]` must be a positive integer. (E.g. 1, 2, 3, ...)
+* All prefixes (i.e. `t\` and `i\`) must be present.
+====
 
 Example: +
 Suppose you wish to remove the second event from the list of events on 20 Feb 2020, +
@@ -493,7 +511,11 @@ You can add additional notes about an event. If the event does not exist, NOVA w
 Format: `note d\[description] t\[YYYY-MM-DD] i\[index]`
 
 [NOTE]
-`[index]` must be a positive integer. (E.g. 1, 2, 3, ...)
+====
+* `[index]` must be a positive integer. (E.g. 1, 2, 3, ...)
+* All prefixes (i.e. `d\`, `t\` and `i\`) must be present.
+* `[description]` can be left as a blank space if you wish (i.e. " ").
+====
 
 Example: +
 Suppose you wish to add a note that indicates the work allocation to a meeting event, +
@@ -509,8 +531,11 @@ image::userguide/EventNote.png[width="500" align="center"]
 _[.small]#Fig 5.3.6: Display message after entering +
 `note d\Alice - Logic component in DG, Bob - UI component in DG t\2020-02-20 i\1`#_
 
+// end::events[]
+
 <<Top, [Back to Top]>>
 
+// tag::view[]
 ==== View Schedule of a Day: `view`
 You can view the schedule of a specified day. If there is nothing to do on that day, NOVA will tell you.
 
@@ -557,6 +582,7 @@ image::userguide/schedule_view_week.png[width="500" align="center"]
 _[.small]#Fig 5.3.8: Display message after entering `view week i\6`#_
 
 <<Top, [Back to Top]>>
+// end::view[]
 
 ==== Find Free Slots: `freeslot`
 You can find free slots on a day easily within your schedule without looking through your schedule.
@@ -573,6 +599,7 @@ NOVA will show you your freeslots on 20 Feb 2020.
 
 <<Top, [Back to Top]>>
 
+//tag::studyplanner[]
 === Daily Study Planner
 Learn how to work with the planner feature in NOVA. You can add daily/weeky tasks into your study plan and schedule it
 on any day you like hassle-free. You need to be in planner mode. Enter the planner mode by entering the command
@@ -688,7 +715,10 @@ textbook” on a random spot within the free slot.
 
 <<Top, [Back to Top]>>
 
+//end::studyplanner[]
+
 //tag::ProgressTracker[]
+
 === Progress Tracker
 Learn how to work with the progress tracker feature in NOVA. You can track important project tasks by adding them into the progress tracker
 and manage them easily. You need to be in Progress Tracker mode. Enter the Progress Tracker mode by entering the
@@ -993,4 +1023,3 @@ into your schedule
 contains the data of your previous NOVA folder.
 
 <<Top, [Back to Top]>>
-

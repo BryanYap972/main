@@ -51,13 +51,36 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    /**
+     * Retrieves model object
+     * @return model object
+     */
     Model getModel();
 
+    /**
+     * Sets mode
+     * @param mode mode to set modeEnum
+     * @param modeEnum modeEnum to set to
+     */
     void setMode(Mode mode, ModeEnum modeEnum);
 
+    /**
+     * Retrieves mode object
+     * @return mode object
+     */
     Mode getMode();
 
+    /**
+     * Retrieves modeEnum
+     * @param mode mode to retrieve modeEnum from
+     * @return modeEnum
+     */
     ModeEnum getModeEnum(Mode mode);
 
+    /**
+     * Retrieves string for of modeEnum
+     * @param modeEnum modeENum to get name from
+     * @return string of modeENum name
+     */
     String getModeName(ModeEnum modeEnum);
 }

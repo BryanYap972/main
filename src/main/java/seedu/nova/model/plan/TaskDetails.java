@@ -1,11 +1,12 @@
 package seedu.nova.model.plan;
 
+import java.io.Serializable;
 import java.time.Duration;
 
 /**
  * Task details
  */
-public class TaskDetails {
+public class TaskDetails implements Serializable {
     private final String name;
     private final Duration duration;
     private final TaskFreq freq;

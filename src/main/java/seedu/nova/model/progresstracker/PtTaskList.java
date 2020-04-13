@@ -12,6 +12,9 @@ public class PtTaskList {
 
     private ArrayList<PtTask> list;
 
+    /**
+     * Creates PtTaskList object
+     */
     public PtTaskList() {
         list = new ArrayList<>();
     }

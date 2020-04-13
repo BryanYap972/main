@@ -6,6 +6,9 @@ import static seedu.nova.logic.parser.CliSyntax.PREFIX_PROJECT;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.nova.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.logging.Logger;
+
+import seedu.nova.commons.core.LogsCenter;
 import seedu.nova.logic.commands.Command;
 import seedu.nova.logic.commands.CommandResult;
 import seedu.nova.logic.commands.exceptions.CommandException;
@@ -36,11 +39,20 @@ public class PtEditCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Edited task %d in week %d of %s";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private int weekNum;
     private String project;
     private String taskDesc;
     private int taskNum;
 
+    /**
+     * Creates PtEditCommand object
+     * @param weekNum week of PtTask to be edited
+     * @param project project of PtTask to be edited
+     * @param taskDesc taskDesc of PtTask to be edited
+     * @param taskNum task number of PtTask to be edited
+     */
     public PtEditCommand(int weekNum, String project, String taskDesc, int taskNum) {
         requireNonNull(project);
         requireNonNull(taskDesc);
@@ -69,9 +81,12 @@ public class PtEditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.info("executing edit command for: project " + project + ", week " + weekNum + ", task " + taskNum);
+
         requireNonNull(model);
         boolean isOver13 = weekNum > 13;
 
+        //if week is over 13, throw no week error message
         if (isOver13) {
             throw new CommandException(MESSAGE_NOWEEK);
         } else {

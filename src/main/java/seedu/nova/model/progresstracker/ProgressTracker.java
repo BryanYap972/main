@@ -11,6 +11,9 @@ public class ProgressTracker {
     private Ip ip;
     private Tp tp;
 
+    /**
+     * Creates a ProgressTracker object
+     */
     public ProgressTracker() {
         this.ip = new Ip();
         this.tp = new Tp();

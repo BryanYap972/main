@@ -13,19 +13,30 @@ NOVA is a desktop application to help CS2103T with event planning and managing s
 This section shows a summary of my coding, documentation and other contributions to the project.
 
 * *Major enhancement*:
-I added the ability to manage events.
+I added the ability to add events, namely consultations, meetings, study sessions and lessons.
 
-** What it does:
-
-** Justification:
-
-** Highlights:
-
-** Credits:
-
+** What it does: Allows user to add events to their schedule.
+** Justification: This enables the user to keep track of the various events they have to attend.
+** Highlights: It was necessary to ensure that the user did not add an event with the same date and time slot
+as an already existing event. Hence, implementation of the adding of events had to be done carefully.
+** Credits: The parsing of the commands made use of the Address Book 3 code with some modifications.
 
 * *Minor enhancement*:
+I added the ability to delete events.
 
+** What it does: Allows user to delete events from their schedule.
+** Justification: This enables the user to remove any events that they no longer wish to have.
+** Credits: The parsing of the command made use of the Address Book 3 code with some modifications.
+
+* *Minor enhancement*:
+I added the ability to add notes to events.
+
+** What it does: Allows user to add notes to specific events in their schedule.
+
+** Justification: This enables the user to take down any important details e.g. significant points made in meetings
+so that they do not forget them.
+
+** Credits: The parsing of the command made use of the Address Book 3 code with some modifications.
 
 * *Code contributed*:
 Please click these links to see samples of my code:
@@ -49,8 +60,6 @@ https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/14#pullrequestrev
 https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/14#pullrequestreview-382543444[3],
 https://github.com/huixianc/ped/issues[4])
 
-** Tools:
-
 
 == Contributions to the User Guide
 |===
@@ -58,14 +67,36 @@ https://github.com/huixianc/ped/issues[4])
 They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=event]
+include::../UserGuide.adoc[tag=events]
+
 
 == Contributions to the Developer Guide
+
 |===
 |_Given below are sections I contributed to the Developer Guide.
 They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+|===
+|_1. The Logic component section under Design._
+|===
+
 include::../DeveloperGuide.adoc[tag=logic]
 
+|===
+|_2. The Manage Events section under Implementation._
+|===
+
 include::../DeveloperGuide.adoc[tag=events]
+
+|===
+|_3. The User Stories for events under Appendix B._
+|===
+
+include::../DeveloperGuide.adoc[tag=eventuserstory]
+
+|===
+|_4. The Use Cases for events under Appendix C._
+|===
+
+include::../DeveloperGuide.adoc[tag=eventusecase]

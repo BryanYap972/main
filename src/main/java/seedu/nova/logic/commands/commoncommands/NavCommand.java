@@ -55,14 +55,18 @@ public class NavCommand extends Command {
 
             String modeName = mode.getModeEnum().name();
             String commandMessage = MESSAGE_SUCCESS + modeName + "\n";
+
+            //Get the progress for each project
             String messageProgresstracker = "Projects: \n"
                     + "  IP Project: " + ipProgress + "%\n"
                     + "  TP Project: " + tpProgress + "%";
 
             return new CommandResult(commandMessage + messageProgresstracker, true, false);
         } else {
-            mode.setModeEnum(this.modeEnum);
-            String modeName = mode.getModeEnum().name();
+            //Set mode and get modeEnum from new mode
+            model.setModeEnum(mode, this.modeEnum);
+            ModeEnum modeEnum = model.getModeEnum(mode);
+            String modeName = model.getModeName(modeEnum);
 
             return new CommandResult(MESSAGE_SUCCESS + modeName, true, false);
         }

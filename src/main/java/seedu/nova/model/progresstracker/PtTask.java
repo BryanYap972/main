@@ -12,6 +12,14 @@ public class PtTask {
     private int ptWeek;
     private boolean isDone;
 
+    /**
+     * Creates PtTask object
+     * @param taskDesc taskDesc of task
+     * @param project project of task
+     * @param note note of task
+     * @param ptWeek week of task
+     * @param isDone done status of task
+     */
     public PtTask(TaskDesc taskDesc, Project project, PtNote note, int ptWeek, boolean isDone) {
         requireNonNull(taskDesc);
         requireNonNull(project);

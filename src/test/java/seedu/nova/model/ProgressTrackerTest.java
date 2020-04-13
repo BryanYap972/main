@@ -147,7 +147,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void addTask_succeess() {
+    public void addTask_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);
@@ -157,7 +157,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void deleteTask_succeess() {
+    public void deleteTask_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);
@@ -173,7 +173,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void editTask_succeess() {
+    public void editTask_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);
@@ -186,7 +186,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void addPtNote_succeess() {
+    public void addPtNote_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);
@@ -199,7 +199,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void deletePtNote_succeess() {
+    public void deletePtNote_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);
@@ -211,7 +211,7 @@ public class ProgressTrackerTest {
     }
 
     @Test
-    public void editPtNote_succeess() {
+    public void editPtNote_success() {
         PtTask task = new PtTask(new TaskDesc("taskDesc"), new Ip(), new PtNote(""), 2, false);
 
         progressTracker.addPtTask(task.getProjectName(), task.getPtWeek(), task);

@@ -7,6 +7,9 @@ public class Tp extends Project {
     private PtWeekList weekList;
     private String projectName;
 
+    /**
+     * Creates Tp object
+     */
     public Tp() {
         weekList = new PtWeekList();
         projectName = "tp";

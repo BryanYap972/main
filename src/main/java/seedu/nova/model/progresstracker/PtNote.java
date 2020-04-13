@@ -16,6 +16,10 @@ public class PtNote {
 
     private String note;
 
+    /**
+     * Creates a PtNote object
+     * @param note note in PtNote
+     */
     public PtNote(String note) {
         requireNonNull(note);
         this.note = note;

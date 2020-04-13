@@ -20,9 +20,6 @@ public class NavCommandParser implements Parser<NavCommand> {
         case "ab":
             return new NavCommand(ModeEnum.ADDRESSBOOK);
 
-        case "event":
-            return new NavCommand(ModeEnum.EVENT);
-
         case "schedule":
             return new NavCommand(ModeEnum.SCHEDULE);
 
