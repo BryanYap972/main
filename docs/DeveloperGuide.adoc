@@ -1023,7 +1023,7 @@ Given below are instructions to test the app manually.
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-=== Launch and Shutdown
+=== Launch
 
 . Initial launch
 
@@ -1037,8 +1037,13 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+//tag::shutdown[]
+=== Shutdown
+. Exiting the application
 
+.. Enter `exit` in the command line.
+
+//end::shutdown[]
 === Deleting a person in Address Book
 
 . Enter address book mode via `nav ab`
@@ -1054,11 +1059,34 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+//tag::Pt[]
+=== Adding a project task in Progress Tracker
+
+. Enter progress tracker mode via `nav progresstracker`
+. Adding a project task
+
+.. Test case: `add p\ip w\1 d\new task` +
+Expected: New project task with description "new task" is added to IP project week 1. Message showing successful execution is shown.
+
+.. Test case: `add p\ip w\14 d\new task` +
+Expected: No new project task is added. Error details shown in the status message.
+
+.. Other incorrect add commands to try: `add`, `add p\ppp w\1 d\new task`. +
+Expected: Similar to previous.
+
+
 === Saving data
 
-. Dealing with missing/corrupted data files
+. Dealing with corrupted data file
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+.. Edit the Nova data file to contain invalid data. +
+Example: Adding a @ to a week in a ptTask.
 
-_{ more test cases ... }_
+.. Run the application. The application should start with an empty Nova data file.
 
+. Dealing with missing data file
+
+.. Delete the current Nova data file.
+
+.. Run the application. The application should start with a sample Nova data file with pre-included data.
+//end::Pt[]
