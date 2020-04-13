@@ -30,7 +30,7 @@ import seedu.nova.model.schedule.event.Meeting;
 import seedu.nova.model.schedule.event.StudySession;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Nova} with sample data.
  */
 public class SampleDataUtil {
 
